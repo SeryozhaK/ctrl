@@ -282,8 +282,12 @@ while True:
             print('---------------------------------------')
             print(tokens_generated_so_far)
             print()
+
+        resultFile = open('result.txt', 'a+')
+        resultFile.write(tokens_generated_so_far + '\n\n');
+        resultFile.close()
         print('---------------------------------------')            
-        print(tokens_generated_so_far)
+        print(tokens_generated_so_far + '\n\n')
         print()
           
 
