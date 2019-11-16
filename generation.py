@@ -167,10 +167,10 @@ for _ in range(len(model.layers[2].trainable_weights)):
     else: # everything else is fp16
       tensor.assign(tf.cast(reader.get_tensor(tensor.name[:-2]), tf.float16))
 
-while True:
-    print('WARNING! THIS VERSION OF THE CODE ALLOWS FOR LOWER MEMORY USAGE THROUGH FP16 QUANTIZATION BUT IS UNTESTED; GENERATIONS MAY BE WORSE. USE AT YOUR OWN RISK. ')
-    prompt = raw_input('ENTER PROMPT: ') if not use_py3 else input('ENTER PROMPT: ')
+inputFile = open("input.txt", "r")
+inputData = inputFile.read().splitlines()
 
+for prompt in inputData:
     # tokenize provided prompt
     split_prompt = bpe.apply([prompt])[0].split()
     text = [word2idx[i] for i in split_prompt]
@@ -286,10 +286,10 @@ while True:
         resultFile = open('result.txt', 'a+')
         resultFile.write(tokens_generated_so_far + '\n\n');
         resultFile.close()
-        print('---------------------------------------')            
-        print(tokens_generated_so_far + '\n\n')
-        print()
-          
+        print('1 Link handled successfully')
+        # print(tokens_generated_so_far + '\n\n')
+        # print()
+
 
     except KeyboardInterrupt: #Exception as e:
         print('Continuing')
