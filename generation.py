@@ -284,7 +284,7 @@ for prompt in inputData:
             print()
 
         resultFile = open('result.txt', 'a+')
-        resultFile.write(tokens_generated_so_far + '\n\n');
+        resultFile.write((tokens_generated_so_far + '\n\n').encode("utf-8"));
         resultFile.close()
         print('1 Link handled successfully')
         # print(tokens_generated_so_far + '\n\n')
