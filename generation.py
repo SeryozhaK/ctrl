@@ -16,6 +16,10 @@ from tensorflow.python.ops import embedding_ops
 from tensorflow.python import pywrap_tensorflow
 import fastBPE
 import platform
+import urllib2
+
+from google.colab import drive 
+drive.mount('/content/gdrive') 
 
 use_py3 = platform.python_version()[0] == '3'
 
@@ -167,12 +171,12 @@ for _ in range(len(model.layers[2].trainable_weights)):
     else: # everything else is fp16
       tensor.assign(tf.cast(reader.get_tensor(tensor.name[:-2]), tf.float16))
 
-inputFile = open("input.txt", "r")
-inputData = inputFile.read().splitlines()
+target_url = raw_input('ENTER INPUT FILE URL: ') if not use_py3 else input('ENTER INPUT FILE URL: ')
+inputData = urllib2.urlopen(target_url) # it's a file like object and works just like a file
 
-for prompt in inputData:
-    # tokenize provided prompt
-    split_prompt = bpe.apply([prompt])[0].split()
+for line in inputData:
+    # tokenize provided line
+    split_prompt = bpe.apply([line])[0].split()
     text = [word2idx[i] for i in split_prompt]
 
     # pad with 0s and create a mini-batch of 2 (arbitrary, for ease of code)
