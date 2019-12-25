@@ -182,8 +182,7 @@ hdr = {'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.11 (KHTML,
 req = urllib2.Request(target_url, headers=hdr)
 page = urllib2.urlopen(req)
 
-inputData = page.read()
-print(inputData)
+inputData = page.read().splitlines()
 
 for line in inputData:
     # tokenize provided line
