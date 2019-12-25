@@ -180,8 +180,9 @@ hdr = {'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.11 (KHTML,
        'Connection': 'keep-alive'}
 
 req = urllib2.Request(target_url, headers=hdr)
-inputData = urllib2.urlopen(req)
+page = urllib2.urlopen(req)
 
+inputData = page.read()
 print(inputData)
 
 for line in inputData:
