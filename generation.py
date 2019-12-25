@@ -172,7 +172,15 @@ for _ in range(len(model.layers[2].trainable_weights)):
       tensor.assign(tf.cast(reader.get_tensor(tensor.name[:-2]), tf.float16))
 
 target_url = raw_input('ENTER INPUT FILE URL: ') if not use_py3 else input('ENTER INPUT FILE URL: ')
-inputData = urllib2.urlopen(target_url) # it's a file like object and works just like a file
+hdr = {'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.11 (KHTML, like Gecko) Chrome/23.0.1271.64 Safari/537.11',
+       'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+       'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.3',
+       'Accept-Encoding': 'none',
+       'Accept-Language': 'en-US,en;q=0.8',
+       'Connection': 'keep-alive'}
+
+req = urllib2.Request(target_url, headers=hdr)
+inputData = urllib2.urlopen(req)
 
 for line in inputData:
     # tokenize provided line
@@ -287,7 +295,7 @@ for line in inputData:
             print(tokens_generated_so_far)
             print()
 
-        resultFile = open('result.txt', 'a+')
+        resultFile = open('/content/gdrive/result.txt', 'a+')
         resultFile.write((tokens_generated_so_far + '\n\n').encode("utf-8"));
         resultFile.close()
         print('1 Link handled successfully')
