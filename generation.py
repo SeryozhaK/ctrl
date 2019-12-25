@@ -298,7 +298,8 @@ for line in inputData:
             print(tokens_generated_so_far)
             print()
 
-        resultFile = open('/content/gdrive/result.txt', 'a+')
+        absolutePath = os.path.join('/content/gdrive/My Drive', 'result.txt')
+        resultFile = open(absolutePath, 'a+')
         resultFile.write((tokens_generated_so_far + '\n\n').encode("utf-8"));
         resultFile.close()
         print('1 Link handled successfully')
